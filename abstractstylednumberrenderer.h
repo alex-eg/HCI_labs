@@ -8,7 +8,7 @@ class AbstractStyledNumberRenderer
 {
 public:
     AbstractStyledNumberRenderer(int _num);
-    ~AbstractStyledNumberRenderer();
+    virtual ~AbstractStyledNumberRenderer();
 
     virtual void render(const QStyleOption& _option) = 0;
     QImage* image() const;

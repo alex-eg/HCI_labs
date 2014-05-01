@@ -1,3 +1,4 @@
+#include <QDebug>
 #include <QImage>
 #include <QPixmap>
 #include <QLabel>
@@ -8,14 +9,15 @@
 #include "ui_digitsdemonstrator.h"
 
 #include "abstractstylednumberrenderer.h"
-#include "arabnumsrenderer.h"
+#include "testgenerator.h"
 
-DigitsDemonstrator::DigitsDemonstrator(QWidget *parent) :
+DigitsDemonstrator::DigitsDemonstrator(const TestGenerator* _testGenerator, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::DigitsDemonstrator)
+    ui(new Ui::DigitsDemonstrator),
+    m_testGenerator(_testGenerator)
 {
     ui->setupUi(this);
-    generateTest();
+    renderNumsPics();
 }
 
 DigitsDemonstrator::~DigitsDemonstrator()
@@ -24,37 +26,19 @@ DigitsDemonstrator::~DigitsDemonstrator()
     delete ui;
 }
 
-void DigitsDemonstrator::generateTest()
+void DigitsDemonstrator::renderNumsPics()
 {
-    foreach(AbstractStyledNumberRenderer* renderer, m_generatedTest)
-        delete renderer;
-
-    int testsNum = qrand() % 9 + 1;
-
-    for(int i = 0; i < testsNum; i++)
-    {
-        int style = qrand() % StylesCount;
-        int randomNum = qrand() % 10;
-
-        switch(ArabNums)
-        {
-            case ArabNums:
-            {
-                new ArabNumsRenderer(randomNum);
-                m_generatedTest << new ArabNumsRenderer(randomNum);
-                break;
-            }
-        }
-
-    }
-
     QStyleOption option;
     option.palette.setColor(QPalette::Text, Qt::black);
     option.rect = QRect(0, 0, 50, 50);
 
-
-    foreach(AbstractStyledNumberRenderer* renderer, m_generatedTest)
+    foreach(AbstractStyledNumberRenderer* renderer, m_testGenerator->generatedTest())
     {
+        if(!renderer)
+        {
+            qDebug() << "smth goes wrong in " << Q_FUNC_INFO;
+            continue;
+        }
         renderer->render(option);
 
         QLabel* label = new QLabel;
@@ -62,3 +46,4 @@ void DigitsDemonstrator::generateTest()
         layout()->addWidget(label);
     }
 }
+

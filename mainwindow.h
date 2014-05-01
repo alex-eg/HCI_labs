@@ -8,6 +8,7 @@ namespace Ui
 }
 
 class DigitsDemonstrator;
+class TestGenerator;
 
 class MainWindow : public QMainWindow
 {
@@ -32,6 +33,7 @@ private:
 
 private:
     Ui::MainWindow *ui;
+    TestGenerator* m_testGenerator;
     DigitsDemonstrator* m_demonstrator;
 };
 

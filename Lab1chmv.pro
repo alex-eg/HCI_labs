@@ -16,13 +16,15 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     digitsdemonstrator.cpp \
     abstractstylednumberrenderer.cpp \
-    arabnumsrenderer.cpp
+    arabnumsrenderer.cpp \
+    testgenerator.cpp
 
 HEADERS  += mainwindow.h \
     digitsdemonstrator.h \
     labapi.h \
     abstractstylednumberrenderer.h \
-    arabnumsrenderer.h
+    arabnumsrenderer.h \
+    testgenerator.h
 
 FORMS    += mainwindow.ui \
     digitsdemonstrator.ui

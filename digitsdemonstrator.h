@@ -9,24 +9,25 @@ class DigitsDemonstrator;
 }
 
 class AbstractStyledNumberRenderer;
+class TestGenerator;
 
 class DigitsDemonstrator : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit DigitsDemonstrator(QWidget *parent = 0);
+    explicit DigitsDemonstrator(const TestGenerator* _testGenerator, QWidget *parent = 0);
     ~DigitsDemonstrator();
 
 signals:
     void finished();
 
 private:
-    void generateTest();    
+    void renderNumsPics();
 
 private:
     Ui::DigitsDemonstrator *ui;
-    QList<AbstractStyledNumberRenderer*> m_generatedTest;
+    const TestGenerator* m_testGenerator;
 };
 
 #endif // DIGITSDEMONSTRATOR_H

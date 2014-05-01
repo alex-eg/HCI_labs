@@ -4,10 +4,12 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "digitsdemonstrator.h"
+#include "testgenerator.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
+    m_testGenerator(new TestGenerator),
     m_demonstrator(NULL)
 {
     ui->setupUi(this);
@@ -28,10 +30,13 @@ void MainWindow::startTest()
 {
     hide();
 
-    m_demonstrator = new DigitsDemonstrator;
+    Q_ASSERT(m_testGenerator);
+    m_testGenerator->generateOtherTest();
+
+    m_demonstrator = new DigitsDemonstrator(m_testGenerator);
     m_demonstrator->show();
 
-    connect(m_demonstrator, SIGNAL(finished()),
+ //   connect(m_demonstrator, SIGNAL(finished()),
 }
 
 bool MainWindow::eventFilter(QObject* _obj, QEvent* _ev)
