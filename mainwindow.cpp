@@ -45,10 +45,23 @@ void MainWindow::startTest()
 void MainWindow::chooseAnswers()
 {
     m_demonstrator->hide();
+    m_demonstrator->deleteLater();
+    m_demonstrator = NULL;
 
     delete m_testChooser;
     m_testChooser = new TestAnswersChooser(m_testGenerator);
     m_testChooser->show();
+
+    connect(m_testChooser, SIGNAL(finished()), SLOT(testFinished()));
+}
+
+void MainWindow::testFinished()
+{
+    // test saving logics here
+    m_testChooser->hide();
+    m_testChooser->deleteLater();
+    m_testChooser = NULL;
+    show();
 }
 
 bool MainWindow::eventFilter(QObject* _obj, QEvent* _ev)

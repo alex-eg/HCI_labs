@@ -22,6 +22,7 @@ public:
 private slots:
     void startTest();
     void chooseAnswers();
+    void testFinished();
 
 private:
     bool eventFilter(QObject* _obj, QEvent* _ev);

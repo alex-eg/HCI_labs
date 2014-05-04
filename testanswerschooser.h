@@ -18,11 +18,14 @@ public:
     explicit TestAnswersChooser(const TestGenerator* _testGenerator, QWidget* _parent = 0);
     ~TestAnswersChooser();
 
+signals:
+    void finished();
+
 private slots:
-    void userChoosedVariants();
+    void nextState();
 
 private:
-    enum ChooserState {ChooseNums, ShowCorrect};
+    enum ChooserState {NoState, ChooseNums, ShowCorrect, Finish};
 
     void setState(ChooserState _state);
 
@@ -30,6 +33,7 @@ private:
     Ui::TestAnswersChooser *ui;
     const TestGenerator* m_testGenerator;
     DigitsDemonstrator* m_demonstrator;
+    ChooserState m_state;
 };
 
 #endif // TESTANSWERSCHOOSER_H

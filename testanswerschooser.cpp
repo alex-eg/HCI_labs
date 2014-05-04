@@ -10,13 +10,16 @@ TestAnswersChooser::TestAnswersChooser(const TestGenerator* _testGenerator, QWid
     QWidget(_parent),
     ui(new Ui::TestAnswersChooser),
     m_testGenerator(_testGenerator),
-    m_demonstrator(NULL)
+    m_demonstrator(NULL),
+    m_state(NoState)
 {
     ui->setupUi(this);
 
-    setState(ChooseNums);
+    //setState(ChooseNums);
 
-    connect(ui->next, SIGNAL(clicked()), SLOT(userChoosedVariants()));
+    nextState();
+
+    connect(ui->next, SIGNAL(clicked()), SLOT(nextState()));
 }
 
 TestAnswersChooser::~TestAnswersChooser()
@@ -24,15 +27,21 @@ TestAnswersChooser::~TestAnswersChooser()
     delete ui;
 }
 
-void TestAnswersChooser::userChoosedVariants()
+void TestAnswersChooser::nextState()
 {
-    setState(ShowCorrect);
+    int tmp = static_cast<unsigned int>(m_state);
+    ++tmp;
+    m_state = static_cast<ChooserState>(tmp);
+
+    setState(m_state);
 }
 
 void TestAnswersChooser::setState(ChooserState _state)
 {
     if(_state == ChooseNums)
     {
+        ui->numsChooser->setEnabled(true);
+
         ui->title->show();
         ui->subtitle->hide();
 
@@ -41,6 +50,8 @@ void TestAnswersChooser::setState(ChooserState _state)
     }
     else if(_state == ShowCorrect)
     {
+        ui->numsChooser->setEnabled(false);
+
         ui->title->hide();
         ui->subtitle->show();
 
@@ -53,4 +64,8 @@ void TestAnswersChooser::setState(ChooserState _state)
         else
             qDebug() << "Wrong layout type in " << Q_FUNC_INFO;
     }
+    else if(_state == Finish)
+        emit finished();
+    else
+        qDebug() << "smth goes wrong in" << Q_FUNC_INFO;
 }
