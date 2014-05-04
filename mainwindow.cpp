@@ -36,7 +36,7 @@ void MainWindow::startTest()
     Q_ASSERT(m_testGenerator);
     m_testGenerator->generateOtherTest();
 
-    m_demonstrator = new DigitsDemonstrator(m_testGenerator);
+    m_demonstrator = new DigitsDemonstrator(m_testGenerator, 3);
     m_demonstrator->show();
 
     connect(m_demonstrator, SIGNAL(finished()), SLOT(chooseAnswers()));
@@ -47,7 +47,7 @@ void MainWindow::chooseAnswers()
     m_demonstrator->hide();
 
     delete m_testChooser;
-    m_testChooser = new TestAnswersChooser;
+    m_testChooser = new TestAnswersChooser(m_testGenerator);
     m_testChooser->show();
 }
 

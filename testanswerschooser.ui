@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="title">
      <property name="font">
       <font>
        <family>Times New Roman</family>
@@ -139,6 +139,29 @@
        <enum>Unchecked</enum>
       </property>
      </item>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="subtitle">
+     <property name="font">
+      <font>
+       <family>Times New Roman</family>
+       <pointsize>25</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Что было показано:</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="next">
+     <property name="text">
+      <string>Дальше &gt;&gt;</string>
+     </property>
     </widget>
    </item>
   </layout>
