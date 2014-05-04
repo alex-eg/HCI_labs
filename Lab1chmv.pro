@@ -17,14 +17,17 @@ SOURCES += main.cpp\
     digitsdemonstrator.cpp \
     abstractstylednumberrenderer.cpp \
     arabnumsrenderer.cpp \
-    testgenerator.cpp
+    testgenerator.cpp \
+    testanswerschooser.cpp
 
 HEADERS  += mainwindow.h \
     digitsdemonstrator.h \
     labapi.h \
     abstractstylednumberrenderer.h \
     arabnumsrenderer.h \
-    testgenerator.h
+    testgenerator.h \
+    testanswerschooser.h
 
 FORMS    += mainwindow.ui \
-    digitsdemonstrator.ui
+    digitsdemonstrator.ui \
+    testanswerschooser.ui

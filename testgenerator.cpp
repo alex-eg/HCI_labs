@@ -30,19 +30,17 @@ QList<AbstractStyledNumberRenderer *> TestGenerator::generatedTest() const
     return m_generatedTest;
 }
 
-void TestGenerator::fillByRandomUniqueNums(const int *_arr, int _size) const
+void TestGenerator::fillByRandomUniqueNums(int* _arr, int _size) const
 {
-    bool used[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-
+    int* placeToWrite = _arr;
     for(int i = 0; i < _size; i++)
+        *(placeToWrite++) = i;
+
+    int randomNum;
+    for(int i = 0; i < _size/2; i++)
     {
-        int randomNum;
-        do
-        {
-            randomNum = qrand() % 10;
-        }
-        while(used[i]);
-        used[i] = true;
+        randomNum = qrand() % _size;
+        std::swap(_arr[i], _arr[randomNum]);
     }
 }
 

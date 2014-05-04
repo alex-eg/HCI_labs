@@ -14,7 +14,7 @@ public:
     QList<AbstractStyledNumberRenderer*> generatedTest() const;
 
 private:
-    void fillByRandomUniqueNums(const int* _arr, int _size) const;
+    void fillByRandomUniqueNums(int* _arr, int _size) const;
     AbstractStyledNumberRenderer* styledNumberFactory(Style _style, int _digit) const;
 
 private:

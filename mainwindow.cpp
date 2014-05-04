@@ -5,12 +5,14 @@
 #include "ui_mainwindow.h"
 #include "digitsdemonstrator.h"
 #include "testgenerator.h"
+#include "testanswerschooser.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     m_testGenerator(new TestGenerator),
-    m_demonstrator(NULL)
+    m_demonstrator(NULL),
+    m_testChooser(NULL)
 {
     ui->setupUi(this);
 
@@ -24,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete m_testGenerator;
 }
 
 void MainWindow::startTest()
@@ -36,7 +39,16 @@ void MainWindow::startTest()
     m_demonstrator = new DigitsDemonstrator(m_testGenerator);
     m_demonstrator->show();
 
- //   connect(m_demonstrator, SIGNAL(finished()),
+    connect(m_demonstrator, SIGNAL(finished()), SLOT(chooseAnswers()));
+}
+
+void MainWindow::chooseAnswers()
+{
+    m_demonstrator->hide();
+
+    delete m_testChooser;
+    m_testChooser = new TestAnswersChooser;
+    m_testChooser->show();
 }
 
 bool MainWindow::eventFilter(QObject* _obj, QEvent* _ev)

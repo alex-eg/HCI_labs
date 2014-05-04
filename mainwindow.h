@@ -7,8 +7,9 @@ namespace Ui
     class MainWindow;
 }
 
-class DigitsDemonstrator;
 class TestGenerator;
+class DigitsDemonstrator;
+class TestAnswersChooser;
 
 class MainWindow : public QMainWindow
 {
@@ -20,6 +21,7 @@ public:
 
 private slots:
     void startTest();
+    void chooseAnswers();
 
 private:
     bool eventFilter(QObject* _obj, QEvent* _ev);
@@ -35,6 +37,7 @@ private:
     Ui::MainWindow *ui;
     TestGenerator* m_testGenerator;
     DigitsDemonstrator* m_demonstrator;
+    TestAnswersChooser* m_testChooser;
 };
 
 #endif // MAINWINDOW_H
