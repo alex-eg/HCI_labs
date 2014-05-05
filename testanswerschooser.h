@@ -2,6 +2,7 @@
 #define TESTANSWERSCHOOSER_H
 
 #include <QWidget>
+#include <QList>
 
 namespace Ui {
 class TestAnswersChooser;
@@ -17,6 +18,8 @@ class TestAnswersChooser : public QWidget
 public:
     explicit TestAnswersChooser(const TestGenerator* _testGenerator, QWidget* _parent = 0);
     ~TestAnswersChooser();
+
+    QList<int> checkedNums() const;
 
 signals:
     void finished();

@@ -8,7 +8,7 @@ namespace Ui {
 class DigitsDemonstrator;
 }
 
-class AbstractStyledNumberRenderer;
+class StyledNumberRenderer;
 class TestGenerator;
 
 class DigitsDemonstrator : public QWidget
@@ -16,11 +16,14 @@ class DigitsDemonstrator : public QWidget
     Q_OBJECT
 
 public:
-    explicit DigitsDemonstrator(const TestGenerator* _testGenerator, QWidget *parent = 0);
+    explicit DigitsDemonstrator(const TestGenerator* _testGenerator, int _timeToShow = 10, QWidget* _parent = 0);
     ~DigitsDemonstrator();
 
 signals:
     void finished();
+
+private slots:
+    void timerTicked();
 
 private:
     void renderNumsPics();
@@ -28,6 +31,7 @@ private:
 private:
     Ui::DigitsDemonstrator *ui;
     const TestGenerator* m_testGenerator;
+    int m_timeLeft;
 };
 
 #endif // DIGITSDEMONSTRATOR_H

@@ -6,8 +6,13 @@
 #include "arabnumsrenderer.h"
 
 ArabNumsRenderer::ArabNumsRenderer(int _number)
-    : AbstractStyledNumberRenderer(_number)
+    : StyledNumberRenderer(_number)
 {}
+
+StyledNumberRenderer::Style ArabNumsRenderer::type() const
+{
+    return ArabNums;
+}
 
 void ArabNumsRenderer::render(const QStyleOption& _option)
 {

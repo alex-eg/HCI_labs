@@ -15,8 +15,6 @@ TestAnswersChooser::TestAnswersChooser(const TestGenerator* _testGenerator, QWid
 {
     ui->setupUi(this);
 
-    //setState(ChooseNums);
-
     nextState();
 
     connect(ui->next, SIGNAL(clicked()), SLOT(nextState()));
@@ -25,6 +23,20 @@ TestAnswersChooser::TestAnswersChooser(const TestGenerator* _testGenerator, QWid
 TestAnswersChooser::~TestAnswersChooser()
 {
     delete ui;
+}
+
+QList<int> TestAnswersChooser::checkedNums() const
+{
+    QList<int> ans;
+    int count = ui->numsChooser->count();
+    for(int i = 0; i < count; i++)
+    {
+        bool isChecked = ui->numsChooser->item(i)->checkState() == Qt::Checked;
+        if(isChecked)
+            ans << i;
+    }
+
+    return ans;
 }
 
 void TestAnswersChooser::nextState()

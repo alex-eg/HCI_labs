@@ -14,19 +14,22 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    digitsdemonstrator.cpp \
-    abstractstylednumberrenderer.cpp \
-    arabnumsrenderer.cpp \
-    testgenerator.cpp \
-    testanswerschooser.cpp
+        digitsdemonstrator.cpp \
+            stylednums/stylednumberrenderer.cpp \
+            stylednums/arabnumsrenderer.cpp \
+        testgenerator.cpp \
+        testanswerschooser.cpp \
+    stylednums/romenumsrenderer.cpp
 
 HEADERS  += mainwindow.h \
     digitsdemonstrator.h \
-    labapi.h \
-    abstractstylednumberrenderer.h \
-    arabnumsrenderer.h \
+        stylednums/stylednumsapi.h \
+        stylednums/stylednumberrenderer.h \
+        stylednums/arabnumsrenderer.h \
     testgenerator.h \
-    testanswerschooser.h
+    testanswerschooser.h \
+    stylednums/stylednumberrenderer.h \
+    stylednums/romenumsrenderer.h
 
 FORMS    += mainwindow.ui \
     digitsdemonstrator.ui \

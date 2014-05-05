@@ -3,14 +3,19 @@
 
 #include <QImage>
 #include <QStyleOption>
+#include "stylednumsapi.h"
 
-class AbstractStyledNumberRenderer
+class StyledNumberRenderer
 {
 public:
-    AbstractStyledNumberRenderer(int _num);
-    virtual ~AbstractStyledNumberRenderer();
+    enum Style {ArabNums, RomeNums, Words, Pics, StylesCount};
 
+    StyledNumberRenderer(int _num);
+    virtual ~StyledNumberRenderer();
+
+    virtual Style type() const = 0;
     virtual void render(const QStyleOption& _option) = 0;
+
     QImage* image() const;
 
 protected:

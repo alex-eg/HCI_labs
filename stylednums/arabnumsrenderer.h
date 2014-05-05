@@ -1,12 +1,14 @@
 #ifndef ARABNUMSRENDERER_H
 #define ARABNUMSRENDERER_H
 
-#include "abstractstylednumberrenderer.h"
+#include "stylednums/stylednumberrenderer.h"
 
-class ArabNumsRenderer : public AbstractStyledNumberRenderer
+class ArabNumsRenderer : public StyledNumberRenderer
 {
 public:
     ArabNumsRenderer(int _number);
+    Style type() const;
+
     void render(const QStyleOption& _option);
 };
 

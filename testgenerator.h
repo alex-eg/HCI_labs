@@ -2,23 +2,23 @@
 #define TESTGENERATOR_H
 
 #include <QList>
-#include "labapi.h"
+#include "stylednums/stylednumsapi.h"
 
-class AbstractStyledNumberRenderer;
+class StyledNumberRenderer;
 
 class TestGenerator
 {
 public:
     TestGenerator();
     void generateOtherTest();
-    QList<AbstractStyledNumberRenderer*> generatedTest() const;
+    QList<StyledNumberRenderer*> generatedTest() const;
 
 private:
     void fillByRandomUniqueNums(int* _arr, int _size) const;
-    AbstractStyledNumberRenderer* styledNumberFactory(Style _style, int _digit) const;
+    StyledNumberRenderer* styledNumberFactory(Style _style, int _digit) const;
 
 private:
-    QList<AbstractStyledNumberRenderer*> m_generatedTest;
+    QList<StyledNumberRenderer*> m_generatedTest;
 };
 
 #endif // TESTGENERATOR_H

@@ -1,8 +1,8 @@
 #include "testgenerator.h"
 
-#include "abstractstylednumberrenderer.h"
-#include "arabnumsrenderer.h"
-
+#include "stylednums/stylednumberrenderer.h"
+#include "stylednums/arabnumsrenderer.h"
+#include "stylednums/romenumsrenderer.h"
 
 TestGenerator::TestGenerator()
 {
@@ -10,7 +10,7 @@ TestGenerator::TestGenerator()
 
 void TestGenerator::generateOtherTest()
 {
-    foreach(AbstractStyledNumberRenderer* renderer, m_generatedTest)
+    foreach(StyledNumberRenderer* renderer, m_generatedTest)
         delete renderer;
     m_generatedTest.clear();
 
@@ -25,7 +25,7 @@ void TestGenerator::generateOtherTest()
     }
 }
 
-QList<AbstractStyledNumberRenderer *> TestGenerator::generatedTest() const
+QList<StyledNumberRenderer *> TestGenerator::generatedTest() const
 {
     return m_generatedTest;
 }
@@ -44,15 +44,14 @@ void TestGenerator::fillByRandomUniqueNums(int* _arr, int _size) const
     }
 }
 
-AbstractStyledNumberRenderer *TestGenerator::styledNumberFactory(Style _style, int _digit) const
+StyledNumberRenderer *TestGenerator::styledNumberFactory(Style _style, int _digit) const
 {
     switch(_style)
     {
         case ArabNums:
-        {
             return new ArabNumsRenderer(_digit);
-            break;
-        }
+        case RomeNums:
+            return new RomeNumsRenderer(_digit);
     }
     return NULL;
 }

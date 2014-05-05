@@ -1,29 +1,49 @@
 #include <QDebug>
+#include <QTimer>
 #include <QImage>
 #include <QPixmap>
 #include <QLabel>
 #include <QStyleOption>
 
-#include "labapi.h"
 #include "digitsdemonstrator.h"
 #include "ui_digitsdemonstrator.h"
 
-#include "abstractstylednumberrenderer.h"
+#include "stylednums/stylednumberrenderer.h"
 #include "testgenerator.h"
 
-DigitsDemonstrator::DigitsDemonstrator(const TestGenerator* _testGenerator, QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::DigitsDemonstrator),
-    m_testGenerator(_testGenerator)
+DigitsDemonstrator::DigitsDemonstrator(const TestGenerator* _testGenerator, int _timeToShow, QWidget* _parent)
+    : QWidget(_parent),
+      ui(new Ui::DigitsDemonstrator),
+      m_timeLeft(_timeToShow),
+      m_testGenerator(_testGenerator)
 {
     ui->setupUi(this);
     renderNumsPics();
+
+    if(_timeToShow > 0)
+    {
+        QTimer* timer = new QTimer(this);
+        connect(timer, SIGNAL(timeout()), SLOT(timerTicked()));
+        timer->start(1000);
+    }
 }
 
 DigitsDemonstrator::~DigitsDemonstrator()
 {
-    emit finished();
     delete ui;
+}
+
+void DigitsDemonstrator::timerTicked()
+{
+    m_timeLeft--;
+    qDebug() << m_timeLeft;
+    //update();
+
+    if(m_timeLeft == 0)
+    {
+        hide();
+        emit finished();
+    }
 }
 
 void DigitsDemonstrator::renderNumsPics()
@@ -32,7 +52,7 @@ void DigitsDemonstrator::renderNumsPics()
     option.palette.setColor(QPalette::Text, Qt::black);
     option.rect = QRect(0, 0, 50, 50);
 
-    foreach(AbstractStyledNumberRenderer* renderer, m_testGenerator->generatedTest())
+    foreach(StyledNumberRenderer* renderer, m_testGenerator->generatedTest())
     {
         if(!renderer)
         {
