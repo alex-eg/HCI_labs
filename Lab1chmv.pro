@@ -20,7 +20,8 @@ SOURCES += main.cpp\
         testgenerator.cpp \
         testanswerschooser.cpp \
     stylednums/romenumsrenderer.cpp \
-    stylednums/wordpresentationnumsrenderer.cpp
+    stylednums/wordpresentationnumsrenderer.cpp \
+    stylednums/symbolicpresentationnumersrenderer.cpp
 
 HEADERS  += mainwindow.h \
     digitsdemonstrator.h \
@@ -31,7 +32,8 @@ HEADERS  += mainwindow.h \
     testanswerschooser.h \
     stylednums/stylednumberrenderer.h \
     stylednums/romenumsrenderer.h \
-    stylednums/wordpresentationnumsrenderer.h
+    stylednums/wordpresentationnumsrenderer.h \
+    stylednums/symbolicpresentationnumersrenderer.h
 
 FORMS    += mainwindow.ui \
     digitsdemonstrator.ui \

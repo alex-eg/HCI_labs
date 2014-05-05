@@ -14,8 +14,8 @@
 DigitsDemonstrator::DigitsDemonstrator(const TestGenerator* _testGenerator, int _timeToShow, QWidget* _parent)
     : QWidget(_parent),
       ui(new Ui::DigitsDemonstrator),
-      m_timeLeft(_timeToShow),
-      m_testGenerator(_testGenerator)
+      m_testGenerator(_testGenerator),
+      m_timeLeft(_timeToShow)
 {
     ui->setupUi(this);
     renderNumsPics();

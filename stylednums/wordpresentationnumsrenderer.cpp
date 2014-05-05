@@ -12,7 +12,7 @@ WordPresentationNumsRenderer::WordPresentationNumsRenderer(int _num)
         words << "Ноль" << "Один" << "Два" << "Три" << "Четыре" << "Пять" << "Шесть" << "Семь" << "Восемь" << "Девять";
 }
 
-StyledNumberRenderer::Style WordPresentationNumsRenderer::type() const
+Style WordPresentationNumsRenderer::type() const
 {
     return Words;
 }

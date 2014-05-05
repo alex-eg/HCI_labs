@@ -9,7 +9,7 @@ ArabNumsRenderer::ArabNumsRenderer(int _number)
     : StyledNumberRenderer(_number)
 {}
 
-StyledNumberRenderer::Style ArabNumsRenderer::type() const
+Style ArabNumsRenderer::type() const
 {
     return ArabNums;
 }

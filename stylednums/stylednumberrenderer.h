@@ -8,8 +8,6 @@
 class StyledNumberRenderer
 {
 public:
-    enum Style {ArabNums, RomeNums, Words, Pics, StylesCount};
-
     StyledNumberRenderer(int _num);
     virtual ~StyledNumberRenderer();
 

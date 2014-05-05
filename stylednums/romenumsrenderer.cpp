@@ -13,7 +13,7 @@ RomeNumsRenderer::RomeNumsRenderer(int _num)
         romanNums << "0" << "I" << "II" << "III" << "IV" << "V" << "VI" << "VII" << "VIII" << "IX";
 }
 
-StyledNumberRenderer::Style RomeNumsRenderer::type() const
+Style RomeNumsRenderer::type() const
 {
     return RomeNums;
 }
