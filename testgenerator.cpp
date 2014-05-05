@@ -3,6 +3,7 @@
 #include "stylednums/stylednumberrenderer.h"
 #include "stylednums/arabnumsrenderer.h"
 #include "stylednums/romenumsrenderer.h"
+#include "stylednums/wordpresentationnumsrenderer.h"
 
 TestGenerator::TestGenerator()
 {
@@ -52,6 +53,8 @@ StyledNumberRenderer *TestGenerator::styledNumberFactory(Style _style, int _digi
             return new ArabNumsRenderer(_digit);
         case RomeNums:
             return new RomeNumsRenderer(_digit);
+    case Words:
+            return new WordPresentationNumsRenderer(_digit);
     }
     return NULL;
 }

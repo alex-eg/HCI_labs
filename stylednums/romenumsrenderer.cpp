@@ -10,7 +10,7 @@ RomeNumsRenderer::RomeNumsRenderer(int _num)
     : StyledNumberRenderer(_num)
 {
     if(romanNums.isEmpty())
-        romanNums << "I" << "II" << "III" << "IV" << "V" << "VI" << "VII" << "VIII" << "IX" << "X";
+        romanNums << "0" << "I" << "II" << "III" << "IV" << "V" << "VI" << "VII" << "VIII" << "IX";
 }
 
 StyledNumberRenderer::Style RomeNumsRenderer::type() const
@@ -23,8 +23,6 @@ void RomeNumsRenderer::render(const QStyleOption &_option)
     delete m_img;
     m_img = new QImage(_option.rect.size(), QImage::Format_RGB888);
     m_img->fill(Qt::white);
-
-    qDebug() << m_img << m_img->isNull();
 
     QPainter painter(m_img);
 
