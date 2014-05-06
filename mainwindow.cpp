@@ -45,11 +45,9 @@ void MainWindow::startTest()
 void MainWindow::chooseAnswers()
 {
     m_demonstrator->hide();
-    m_demonstrator->deleteLater();
-    m_demonstrator = NULL;
 
     delete m_testChooser;
-    m_testChooser = new TestAnswersChooser(m_testGenerator);
+    m_testChooser = new TestAnswersChooser(m_testGenerator, m_demonstrator);
     m_testChooser->show();
 
     connect(m_testChooser, SIGNAL(finished()), SLOT(testFinished()));
@@ -57,10 +55,15 @@ void MainWindow::chooseAnswers()
 
 void MainWindow::testFinished()
 {
-    // test saving logics here
+    saveStatistics();
+
+    m_demonstrator->deleteLater();
+    m_demonstrator = NULL;
+
     m_testChooser->hide();
     m_testChooser->deleteLater();
     m_testChooser = NULL;
+
     show();
 }
 
@@ -131,38 +134,7 @@ QString MainWindow::currentUserName() const
     return ui->userNameEdit->text();
 }
 
-//void MainWindow::on_pushButton_released()
-//{
-//    int j, t;
-//    QString s;
-//    deque<int> numbers;
-//    for (int k=1; k<10; k++)
-//        numbers.push_back(k);
-//    random_shuffle(numbers.begin(), numbers.end());
-//    foreach (QLabel* q, Labels)
-//    {
-//        j=qrand()%2;
+void MainWindow::saveStatistics()
+{
 
-//        if (j==0)
-//        {
-//            j=qrand()%7;
-//            q->setStyleSheet(TextColors[j]);
-//            t=qrand()%2;
-//            j=numbers.front();
-//            numbers.pop_front();
-//            if (t==0)
-//            {
-//                s=QString::number(j);
-//            }
-//            else
-//            {
-//                s=RomeNumbers[j];
-//            }
-//            q->setText(s);
-//        }
-//        else
-//        {
-//            q->setText("");
-//        }
-//    }
-//}
+}

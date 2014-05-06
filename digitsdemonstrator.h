@@ -10,6 +10,7 @@ class DigitsDemonstrator;
 
 class StyledNumberRenderer;
 class TestGenerator;
+class QTimer;
 
 class DigitsDemonstrator : public QWidget
 {
@@ -18,6 +19,8 @@ class DigitsDemonstrator : public QWidget
 public:
     explicit DigitsDemonstrator(const TestGenerator* _testGenerator, int _timeToShow = 10, QWidget* _parent = 0);
     ~DigitsDemonstrator();
+
+    void setCountdown(int _seconds);
 
 signals:
     void finished();
@@ -31,6 +34,8 @@ private:
 private:
     Ui::DigitsDemonstrator *ui;
     const TestGenerator* m_testGenerator;
+    QTimer* m_timer;
+
     int m_timeLeft;
 };
 

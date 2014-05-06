@@ -16,7 +16,7 @@ class TestAnswersChooser : public QWidget
     Q_OBJECT
 
 public:
-    explicit TestAnswersChooser(const TestGenerator* _testGenerator, QWidget* _parent = 0);
+    explicit TestAnswersChooser(const TestGenerator* _testGenerator, DigitsDemonstrator* _demonstrator, QWidget* _parent = 0);
     ~TestAnswersChooser();
 
     QList<int> checkedNums() const;

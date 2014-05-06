@@ -15,22 +15,30 @@ DigitsDemonstrator::DigitsDemonstrator(const TestGenerator* _testGenerator, int 
     : QWidget(_parent),
       ui(new Ui::DigitsDemonstrator),
       m_testGenerator(_testGenerator),
+      m_timer(new QTimer(this)),
       m_timeLeft(_timeToShow)
 {
     ui->setupUi(this);
     renderNumsPics();
 
-    if(_timeToShow > 0)
-    {
-        QTimer* timer = new QTimer(this);
-        connect(timer, SIGNAL(timeout()), SLOT(timerTicked()));
-        timer->start(1000);
-    }
+    setCountdown(_timeToShow);
 }
 
 DigitsDemonstrator::~DigitsDemonstrator()
 {
     delete ui;
+}
+
+void DigitsDemonstrator::setCountdown(int _seconds)
+{
+    m_timeLeft = _seconds;
+    if(_seconds > 0)
+    {
+        connect(m_timer, SIGNAL(timeout()), SLOT(timerTicked()), Qt::UniqueConnection);
+        m_timer->start(1000);
+    }
+    else
+        m_timer->stop();
 }
 
 void DigitsDemonstrator::timerTicked()
@@ -42,6 +50,8 @@ void DigitsDemonstrator::timerTicked()
     if(m_timeLeft == 0)
     {
         hide();
+        m_timer->stop();
+
         emit finished();
     }
 }
@@ -50,7 +60,9 @@ void DigitsDemonstrator::renderNumsPics()
 {
     QStyleOption option;
     option.palette.setColor(QPalette::Text, Qt::black);
-    option.rect = QRect(0, 0, 50, 50);
+    option.rect = QRect(0, 0, 100, 50);
+
+    option.fontMetrics = QFontMetrics(defaultStringsFont);
 
     foreach(StyledNumberRenderer* renderer, m_testGenerator->generatedTest())
     {

@@ -1,6 +1,7 @@
 #ifndef ABSTRACTSTYLEDNUMBERRENDERER_H
 #define ABSTRACTSTYLEDNUMBERRENDERER_H
 
+#include <QString>
 #include <QImage>
 #include <QStyleOption>
 #include "stylednumsapi.h"
@@ -15,6 +16,9 @@ public:
     virtual void render(const QStyleOption& _option) = 0;
 
     QImage* image() const;
+
+protected:
+    void renderWithText(const QStyleOption& _option, const QString& _text);
 
 protected:
     int m_num;

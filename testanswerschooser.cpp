@@ -6,11 +6,11 @@
 
 #include "digitsdemonstrator.h"
 
-TestAnswersChooser::TestAnswersChooser(const TestGenerator* _testGenerator, QWidget* _parent) :
+TestAnswersChooser::TestAnswersChooser(const TestGenerator* _testGenerator, DigitsDemonstrator* _demonstrator, QWidget* _parent) :
     QWidget(_parent),
     ui(new Ui::TestAnswersChooser),
     m_testGenerator(_testGenerator),
-    m_demonstrator(NULL),
+    m_demonstrator(_demonstrator),
     m_state(NoState)
 {
     ui->setupUi(this);
@@ -57,8 +57,7 @@ void TestAnswersChooser::setState(ChooserState _state)
         ui->title->show();
         ui->subtitle->hide();
 
-        delete m_demonstrator;
-        m_demonstrator = NULL;
+        m_demonstrator->hide();
     }
     else if(_state == ShowCorrect)
     {
@@ -67,11 +66,12 @@ void TestAnswersChooser::setState(ChooserState _state)
         ui->title->hide();
         ui->subtitle->show();
 
-        QHBoxLayout* l;
-        if(l = static_cast<QHBoxLayout*>(layout()))
+        QHBoxLayout* l = static_cast<QHBoxLayout*>(layout());
+        if(l)
         {
-            m_demonstrator = new DigitsDemonstrator(m_testGenerator, -1);
+            m_demonstrator->setCountdown(-1);
             l->insertWidget(l->count()-1, m_demonstrator);
+            m_demonstrator->show();
         }
         else
             qDebug() << "Wrong layout type in " << Q_FUNC_INFO;

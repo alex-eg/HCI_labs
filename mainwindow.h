@@ -29,10 +29,11 @@ private:
 
     void userNameClicked();
     void userNameEditingFinished();
-
     void resetPreviousUserName();
-
     inline QString currentUserName() const;
+//  ---------------------------------------
+
+    void saveStatistics();
 
 private:
     Ui::MainWindow *ui;

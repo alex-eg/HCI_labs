@@ -27,17 +27,9 @@ Style SymbolicPresentationNumersRenderer::type() const
     return SymbolicNum;
 }
 
-void SymbolicPresentationNumersRenderer::render(const QStyleOption &_option)
+void SymbolicPresentationNumersRenderer::render(const QStyleOption& _option)
 {
-    delete m_img;
-    m_img = new QImage(_option.rect.size(), QImage::Format_RGB888);
-    m_img->fill(Qt::white);
-
-    QPainter painter(m_img);
-
-    painter.setBrush(_option.palette.text());
-
     int randomSymbol = qrand() % m_symbols.size();
     QString s(m_num, m_symbols[randomSymbol]);
-    painter.drawText(_option.rect, s);
+    renderWithText(_option, s);
 }

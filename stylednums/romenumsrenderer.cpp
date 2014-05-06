@@ -20,12 +20,5 @@ Style RomeNumsRenderer::type() const
 
 void RomeNumsRenderer::render(const QStyleOption &_option)
 {
-    delete m_img;
-    m_img = new QImage(_option.rect.size(), QImage::Format_RGB888);
-    m_img->fill(Qt::white);
-
-    QPainter painter(m_img);
-
-    painter.setBrush(_option.palette.text());
-    painter.drawText(_option.rect, romanNums[m_num]);
+    renderWithText(_option, romanNums[m_num]);
 }

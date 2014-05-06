@@ -17,9 +17,9 @@ void TestGenerator::generateOtherTest()
     m_generatedTest.clear();
 
     int digits[10];
-    int digitsCount = qrand() % 9 + 1;
-    fillByRandomUniqueNums(digits, digitsCount);
+    fillByRandomUniqueNums(digits, 10);
 
+    int digitsCount = qrand() % 9 + 1;
     for(int i = 0; i < digitsCount; i++)
     {
         Style style = static_cast<Style>(qrand() % StylesCount);
