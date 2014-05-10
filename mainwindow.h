@@ -10,6 +10,7 @@ namespace Ui
 class TestGenerator;
 class DigitsDemonstrator;
 class TestAnswersChooser;
+class Statistics;
 
 class MainWindow : public QMainWindow
 {
@@ -40,6 +41,7 @@ private:
     TestGenerator* m_testGenerator;
     DigitsDemonstrator* m_demonstrator;
     TestAnswersChooser* m_testChooser;
+    Statistics* m_statistics;
 };
 
 #endif // MAINWINDOW_H

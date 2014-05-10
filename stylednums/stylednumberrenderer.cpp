@@ -17,6 +17,11 @@ QImage* StyledNumberRenderer::image() const
     return m_img;
 }
 
+int StyledNumberRenderer::num() const
+{
+    return m_num;
+}
+
 void StyledNumberRenderer::renderWithText(const QStyleOption& _option, const QString &_text)
 {
     delete m_img;

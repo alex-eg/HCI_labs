@@ -16,6 +16,7 @@ public:
     virtual void render(const QStyleOption& _option) = 0;
 
     QImage* image() const;
+    int num() const;
 
 protected:
     void renderWithText(const QStyleOption& _option, const QString& _text);

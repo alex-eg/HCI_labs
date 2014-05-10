@@ -6,6 +6,8 @@
 #include "digitsdemonstrator.h"
 #include "testgenerator.h"
 #include "testanswerschooser.h"
+#include "statistics.h"
+#include "stylednums/stylednumberrenderer.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -31,7 +33,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::startTest()
 {
+    qDebug() << currentUserName();
     hide();
+    qDebug() << currentUserName();
 
     Q_ASSERT(m_testGenerator);
     m_testGenerator->generateOtherTest();
@@ -136,5 +140,19 @@ QString MainWindow::currentUserName() const
 
 void MainWindow::saveStatistics()
 {
+    Statistics::UserStats userStats;
+    foreach (StyledNumberRenderer* renderer, m_testGenerator->generatedTest())
+    {
+        int generatedNum = renderer->num();
+        Style generatedStyle = renderer->type();
 
+        if(m_testChooser->checkedNums().contains(generatedNum))
+            ++userStats[generatedStyle];
+        else
+            --userStats[generatedStyle];
+    }
+
+    qDebug() << currentUserName();
+    m_statistics->addUserStats(currentUserName(), userStats);
+    m_statistics->info();
 }
