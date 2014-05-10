@@ -76,6 +76,9 @@
         <property name="focusPolicy">
          <enum>Qt::StrongFocus</enum>
         </property>
+        <property name="text">
+         <string>Аноним</string>
+        </property>
        </widget>
       </item>
       <item>

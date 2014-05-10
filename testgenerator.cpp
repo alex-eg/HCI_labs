@@ -59,5 +59,6 @@ StyledNumberRenderer *TestGenerator::styledNumberFactory(Style _style, int _digi
     case SymbolicNum:
         return new SymbolicPresentationNumersRenderer(_digit);
     }
+    Q_ASSERT(false);
     return NULL;
 }

@@ -3,7 +3,7 @@
 
 #include <QFont>
 
-enum Style {Invalid, ArabNums, RomeNums, Words, SymbolicNum, StylesCount};
+enum Style {ArabNums, RomeNums, Words, SymbolicNum, StylesCount};
 
 static QFont defaultStringsFont("Times New Roman", 20);
 

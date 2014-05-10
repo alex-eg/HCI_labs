@@ -14,7 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),
     m_testGenerator(new TestGenerator),
     m_demonstrator(NULL),
-    m_testChooser(NULL)
+    m_testChooser(NULL),
+    m_statistics(new Statistics)
 {
     ui->setupUi(this);
 
@@ -29,13 +30,14 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete m_testGenerator;
+    delete m_demonstrator;
+    delete m_testChooser;
+    delete m_statistics;
 }
 
 void MainWindow::startTest()
 {
-    qDebug() << currentUserName();
     hide();
-    qDebug() << currentUserName();
 
     Q_ASSERT(m_testGenerator);
     m_testGenerator->generateOtherTest();
@@ -140,7 +142,8 @@ QString MainWindow::currentUserName() const
 
 void MainWindow::saveStatistics()
 {
-    Statistics::UserStats userStats;
+    QVector<Statistics::Stat> userStats = Statistics::defaultUserStats();
+
     foreach (StyledNumberRenderer* renderer, m_testGenerator->generatedTest())
     {
         int generatedNum = renderer->num();
@@ -152,7 +155,6 @@ void MainWindow::saveStatistics()
             --userStats[generatedStyle];
     }
 
-    qDebug() << currentUserName();
+    Q_ASSERT(m_statistics);
     m_statistics->addUserStats(currentUserName(), userStats);
-    m_statistics->info();
 }
