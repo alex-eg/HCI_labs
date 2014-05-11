@@ -1,23 +1,22 @@
 #include <QDebug>
 #include "statistics.h"
 
-Statistics::Statistics()
-    : m_statistics()
-{}
-
-void Statistics::addUserStats(const QString& _user, const QVector<Stat>& _stats)
+Statistics::Statistics(const int _maxLength)
+    : m_maxLength(_maxLength),
+      m_statistics(m_maxLength)
 {
-    if(!m_statistics.contains(_user))
-       m_statistics[_user] << defaultUserStats();
+    qDebug() << Q_FUNC_INFO;
+}
 
-    QVector<Stat> userStats = m_statistics[_user];
+void Statistics::addUserStats(const QVector<Stat>& _stats)
+{
+    Q_ASSERT(_stats.size() == m_maxLength);
 
-    for(int i = 0; i < StylesCount; i++)
+    for(int i = 0; i < m_maxLength; i++)
     {
-        userStats[i].success   += _stats[i].success;
-        userStats[i].unsuccess += _stats[i].unsuccess;
+        m_statistics[i].success   += _stats[i].success;
+        m_statistics[i].unsuccess += _stats[i].unsuccess;
     }
-    m_statistics[_user] = userStats;
 
     info();
 }
@@ -25,18 +24,14 @@ void Statistics::addUserStats(const QString& _user, const QVector<Stat>& _stats)
 QVector<Statistics::Stat> Statistics::defaultUserStats()
 {
     QVector<Statistics::Stat> stats;
-    stats.resize(StylesCount);
+    stats.resize(m_maxLength);
     return stats;
 }
 
 void Statistics::info() const
 {
-    QMapIterator<QString, QVector<Stat> > i(m_statistics);
-    while (i.hasNext())
+    foreach(Stat stat, m_statistics)
     {
-        i.next();
-        qDebug() << i.key();
-        for(int j = 0; j < i.value().size(); j++)
-            qDebug() << "\t" << i.value().at(j).success << i.value().at(j).unsuccess;
+        qDebug() << stat.success << stat.unsuccess;
     }
 }

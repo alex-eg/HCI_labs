@@ -11,10 +11,10 @@ class Statistics
 public:
     struct Stat;
 
-    Statistics();
+    Statistics(const int _maxLength = StylesCount);
 
-    void addUserStats(const QString& _user, const QVector<Stat>& _stats);
-    inline static QVector<Statistics::Stat> defaultUserStats();
+    void addUserStats(const QVector<Stat>& _stats);
+    QVector<Statistics::Stat> defaultUserStats();
 
     void info() const;
 //  -------------------------------------------
@@ -38,7 +38,8 @@ public:
 
 //  -------------------------------------------
 
-    QMap <QString, QVector<Stat> > m_statistics;
+    const int m_maxLength;
+    QVector<Stat> m_statistics;
 };
 
 #endif // STATISTICS_H

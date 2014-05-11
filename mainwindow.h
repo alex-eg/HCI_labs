@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMap>
 namespace Ui
 {
     class MainWindow;
@@ -41,7 +42,7 @@ private:
     TestGenerator* m_testGenerator;
     DigitsDemonstrator* m_demonstrator;
     TestAnswersChooser* m_testChooser;
-    Statistics* m_statistics;
+    QMap<QString, Statistics*> m_userStatistics;
 };
 
 #endif // MAINWINDOW_H

@@ -14,8 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow),
     m_testGenerator(new TestGenerator),
     m_demonstrator(NULL),
-    m_testChooser(NULL),
-    m_statistics(new Statistics)
+    m_testChooser(NULL)
 {
     ui->setupUi(this);
 
@@ -32,7 +31,9 @@ MainWindow::~MainWindow()
     delete m_testGenerator;
     delete m_demonstrator;
     delete m_testChooser;
-    delete m_statistics;
+
+    foreach (Statistics* statistics, m_userStatistics)
+        delete statistics;
 }
 
 void MainWindow::startTest()
@@ -142,7 +143,8 @@ QString MainWindow::currentUserName() const
 
 void MainWindow::saveStatistics()
 {
-    QVector<Statistics::Stat> userStats = Statistics::defaultUserStats();
+    Statistics* gatheredStats = m_userStatistics.value(currentUserName(), new Statistics());
+    QVector<Statistics::Stat> savingStats = gatheredStats->defaultUserStats();
 
     foreach (StyledNumberRenderer* renderer, m_testGenerator->generatedTest())
     {
@@ -150,11 +152,11 @@ void MainWindow::saveStatistics()
         Style generatedStyle = renderer->type();
 
         if(m_testChooser->checkedNums().contains(generatedNum))
-            ++userStats[generatedStyle];
+            ++savingStats[generatedStyle];
         else
-            --userStats[generatedStyle];
+            --savingStats[generatedStyle];
     }
 
-    Q_ASSERT(m_statistics);
-    m_statistics->addUserStats(currentUserName(), userStats);
+    gatheredStats->addUserStats(savingStats);
+    m_userStatistics[currentUserName()] = gatheredStats;
 }
