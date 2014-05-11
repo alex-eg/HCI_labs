@@ -47,7 +47,7 @@ QVariant StatisticsModel::data(const QModelIndex& _index, int _role) const
         if(_role == Qt::DecorationRole)
             return QVariant(randomColor());
         else
-            return QVariant("bla-bla");
+            return QVariant(stylesNames()[_index.row()]);
     }
     else
         qDebug() << Q_FUNC_INFO;

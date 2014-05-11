@@ -6,6 +6,13 @@
 #include <QColor>
 
 enum Style {ArabNums, RomeNums, Words, SymbolicNum, StylesCount};
+static QFont defaultStringsFont("Times New Roman", 20);
+
+inline void inc(Style& _style)
+{
+    unsigned int tmp = static_cast<unsigned int>(_style);
+    _style = static_cast<Style>(++tmp);
+}
 
 inline QString randomColor()
 {
@@ -20,14 +27,12 @@ inline QString randomColor()
     return colors[randomNum];
 }
 
-
-static QFont defaultStringsFont("Times New Roman", 20);
-
-inline void inc(Style& _style)
+inline QVector<QString> stylesNames()
 {
-    unsigned int tmp = static_cast<unsigned int>(_style);
-    _style = static_cast<Style>(++tmp);
+    static QVector<QString> stylesNames;
+    if(stylesNames.isEmpty())
+        stylesNames << "Арабские числа" << "Римские числа" << "Словестное представление" << "Символы";
+    return stylesNames;
 }
-
 
 #endif // STYLEDNUMSAPI_H

@@ -32,10 +32,29 @@
     </widget>
    </item>
    <item>
+    <widget class="QComboBox" name="userChoose"/>
+   </item>
+   <item>
     <widget class="PieView" name="diagramm"/>
    </item>
    <item>
-    <widget class="QComboBox" name="userChoose"/>
+    <widget class="QComboBox" name="type">
+     <item>
+      <property name="text">
+       <string>Угаданные ответы по стилям</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Не угаданные ответы по стилям</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Общая статистика</string>
+      </property>
+     </item>
+    </widget>
    </item>
   </layout>
  </widget>
