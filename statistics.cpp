@@ -8,6 +8,11 @@ Statistics::Statistics(const int _maxLength)
     qDebug() << Q_FUNC_INFO;
 }
 
+const QVector<Statistics::Stat> *Statistics::statistics()
+{
+    return &m_statistics;
+}
+
 void Statistics::addUserStats(const QVector<Stat>& _stats)
 {
     Q_ASSERT(_stats.size() == m_maxLength);

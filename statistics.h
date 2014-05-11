@@ -12,6 +12,7 @@ public:
     struct Stat;
 
     Statistics(const int _maxLength = StylesCount);
+    const QVector<Stat> *statistics();
 
     void addUserStats(const QVector<Stat>& _stats);
     QVector<Statistics::Stat> defaultUserStats();

@@ -9,12 +9,15 @@
 #include "statistics.h"
 #include "stylednums/stylednumberrenderer.h"
 
+#include "statisticswidget.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     m_testGenerator(new TestGenerator),
     m_demonstrator(NULL),
-    m_testChooser(NULL)
+    m_testChooser(NULL),
+    m_statisticsWidget(NULL)
 {
     ui->setupUi(this);
 
@@ -22,7 +25,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->userNameLabel->installEventFilter(this);
     ui->userNameEdit->installEventFilter(this);
 
-    connect(ui->beginTest, SIGNAL(clicked()), this, SLOT(startTest()));
+    connect(ui->beginTest,  SIGNAL(clicked()), this, SLOT(startTest()));
+    connect(ui->statistics, SIGNAL(clicked()), this, SLOT(showStatistics()));
 }
 
 MainWindow::~MainWindow()
@@ -34,6 +38,21 @@ MainWindow::~MainWindow()
 
     foreach (Statistics* statistics, m_userStatistics)
         delete statistics;
+}
+
+Statistics* MainWindow::statistics() const
+{
+    return statistics(currentUserName());
+}
+
+Statistics* MainWindow::statistics(const QString& _user) const
+{
+    return m_userStatistics.value(_user, new Statistics());
+}
+
+QList<QString> MainWindow::users() const
+{
+    return m_userStatistics.keys();
 }
 
 void MainWindow::startTest()
@@ -71,6 +90,21 @@ void MainWindow::testFinished()
     m_testChooser->deleteLater();
     m_testChooser = NULL;
 
+    show();
+}
+
+void MainWindow::showStatistics()
+{
+    m_statisticsWidget = new StatisticsWidget(this);
+    m_statisticsWidget->show();
+    hide();
+    connect(m_statisticsWidget, SIGNAL(finished()), this, SLOT(statisticsClosed()));
+}
+
+void MainWindow::statisticsClosed()
+{
+    delete m_statisticsWidget;
+    m_statisticsWidget = NULL;
     show();
 }
 
@@ -143,7 +177,7 @@ QString MainWindow::currentUserName() const
 
 void MainWindow::saveStatistics()
 {
-    Statistics* gatheredStats = m_userStatistics.value(currentUserName(), new Statistics());
+    Statistics* gatheredStats = statistics(); //= m_userStatistics.value(currentUserName(), new Statistics());
     QVector<Statistics::Stat> savingStats = gatheredStats->defaultUserStats();
 
     foreach (StyledNumberRenderer* renderer, m_testGenerator->generatedTest())
