@@ -23,7 +23,9 @@ SOURCES += main.cpp\
     stylednums/wordpresentationnumsrenderer.cpp \
     stylednums/symbolicpresentationnumersrenderer.cpp \
     statistics.cpp \
-    statisticswidget.cpp
+    statisticswidget.cpp \
+    pieview.cpp \
+    statisticsmodel.cpp
 
 HEADERS  += mainwindow.h \
     digitsdemonstrator.h \
@@ -37,7 +39,9 @@ HEADERS  += mainwindow.h \
     stylednums/wordpresentationnumsrenderer.h \
     stylednums/symbolicpresentationnumersrenderer.h \
     statistics.h \
-    statisticswidget.h
+    statisticswidget.h \
+    pieview.h \
+    statisticsmodel.h
 
 FORMS    += mainwindow.ui \
     digitsdemonstrator.ui \

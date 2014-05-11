@@ -9,6 +9,8 @@ class StatisticsWidget;
 
 class MainWindow;
 class Statistics;
+class StatisticsModel;
+
 class StatisticsWidget : public QWidget
 {
     Q_OBJECT
@@ -22,14 +24,13 @@ signals:
 private:
     void closeEvent(QCloseEvent*);
 
-    inline QRect diagrammRect() const;
-
-    inline int total() const;
-
 private:
     Ui::StatisticsWidget *ui;
+
     MainWindow* m_mainWindow;
     Statistics* m_statistics;
+
+    StatisticsModel* m_model;
 };
 
 #endif // STATISTICSWIDGET_H

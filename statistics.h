@@ -38,7 +38,7 @@ public:
     };
 
 //  -------------------------------------------
-
+private:
     const int m_maxLength;
     QVector<Stat> m_statistics;
 };

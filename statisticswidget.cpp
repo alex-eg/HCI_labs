@@ -1,6 +1,7 @@
 #include "statisticswidget.h"
 #include "ui_statisticswidget.h"
 #include "statistics.h"
+#include "statisticsmodel.h"
 
 #include "mainwindow.h"
 
@@ -10,7 +11,8 @@ StatisticsWidget::StatisticsWidget(MainWindow* _mainWindow, QWidget* _parent) :
     QWidget(_parent),
     ui(new Ui::StatisticsWidget),
     m_mainWindow(_mainWindow),
-    m_statistics(_mainWindow->statistics())
+    m_statistics(_mainWindow->statistics()),
+    m_model(new StatisticsModel(m_statistics))
 {
     ui->setupUi(this);
 
@@ -19,11 +21,9 @@ StatisticsWidget::StatisticsWidget(MainWindow* _mainWindow, QWidget* _parent) :
         ui->userChoose->addItem(str);
     }
 
-    QPainter painter(ui->diagrammView);
-    //painter.drawPie(diagrammRect(), );
+    ui->diagramm->setModel(m_model);
 
-    //   ui->diagrammView->pa
-
+    ui->diagramm->dataChanged(QModelIndex(), QModelIndex());
 }
 
 StatisticsWidget::~StatisticsWidget()
@@ -34,14 +34,4 @@ StatisticsWidget::~StatisticsWidget()
 void StatisticsWidget::closeEvent(QCloseEvent *)
 {
     emit finished();
-}
-
-QRect StatisticsWidget::diagrammRect() const
-{
-    return ui->diagrammView->rect();
-}
-
-int StatisticsWidget::total() const
-{
-
 }

@@ -47,7 +47,10 @@ Statistics* MainWindow::statistics() const
 
 Statistics* MainWindow::statistics(const QString& _user) const
 {
-    return m_userStatistics.value(_user, new Statistics());
+    if(!m_userStatistics.contains(_user))
+        const_cast<MainWindow*>(this)->m_userStatistics[_user] = new Statistics();
+
+    return m_userStatistics[_user];
 }
 
 QList<QString> MainWindow::users() const
@@ -177,7 +180,7 @@ QString MainWindow::currentUserName() const
 
 void MainWindow::saveStatistics()
 {
-    Statistics* gatheredStats = statistics(); //= m_userStatistics.value(currentUserName(), new Statistics());
+    Statistics* gatheredStats = statistics();
     QVector<Statistics::Stat> savingStats = gatheredStats->defaultUserStats();
 
     foreach (StyledNumberRenderer* renderer, m_testGenerator->generatedTest())
