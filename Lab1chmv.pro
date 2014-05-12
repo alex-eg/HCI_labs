@@ -22,7 +22,7 @@ SOURCES += main.cpp\
     stylednums/romenumsrenderer.cpp \
     stylednums/wordpresentationnumsrenderer.cpp \
     stylednums/symbolicpresentationnumersrenderer.cpp \
-    statistics.cpp \
+    statistics/statistics.cpp \
     statisticswidget.cpp \
     pieview.cpp \
     statisticsmodel.cpp
@@ -38,7 +38,7 @@ HEADERS  += mainwindow.h \
     stylednums/romenumsrenderer.h \
     stylednums/wordpresentationnumsrenderer.h \
     stylednums/symbolicpresentationnumersrenderer.h \
-    statistics.h \
+    statistics/statistics.h \
     statisticswidget.h \
     pieview.h \
     statisticsmodel.h
