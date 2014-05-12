@@ -4,6 +4,9 @@
 StatisticsModel::StatisticsModel(Statistics *_statistics)
     : m_statistics(_statistics)
 {
+    for(int i = 0; i < rowCount(); i++)
+        m_randomColors << randomColor();
+
     beginResetModel();
     endResetModel();
 }
@@ -19,7 +22,7 @@ QModelIndex StatisticsModel::index(int _row, int _column, const QModelIndex &_pa
         return createIndex(_row, _column);
 }
 
-QModelIndex StatisticsModel::parent(const QModelIndex& _child) const
+QModelIndex StatisticsModel::parent(const QModelIndex&) const
 {
     return QModelIndex();
 }
@@ -45,7 +48,7 @@ QVariant StatisticsModel::data(const QModelIndex& _index, int _role) const
     else if(_index.column() == 0)
     {
         if(_role == Qt::DecorationRole)
-            return QVariant(randomColor());
+            return QVariant(m_randomColors[_index.row()]);
         else
             return QVariant(stylesNames()[_index.row()]);
     }

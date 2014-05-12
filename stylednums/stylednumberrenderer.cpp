@@ -22,6 +22,11 @@ int StyledNumberRenderer::num() const
     return m_num;
 }
 
+QColor StyledNumberRenderer::color() const
+{
+    return m_color;
+}
+
 void StyledNumberRenderer::renderWithText(const QStyleOption& _option, const QString &_text)
 {
     delete m_img;
@@ -34,4 +39,6 @@ void StyledNumberRenderer::renderWithText(const QStyleOption& _option, const QSt
     painter.setFont(defaultStringsFont);
 
     painter.drawText(_option.rect, _text);
+
+    m_color = _option.palette.text().color();
 }

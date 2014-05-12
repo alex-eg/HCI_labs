@@ -10,7 +10,7 @@ public:
     StatisticsModel(Statistics* _statistics);
 
     QModelIndex index(int _row, int _column, const QModelIndex& _parent = QModelIndex()) const;
-    QModelIndex parent(const QModelIndex &_child) const;
+    QModelIndex parent(const QModelIndex &) const;
     int rowCount(const QModelIndex &parent = QModelIndex()) const;
     int columnCount(const QModelIndex &parent = QModelIndex()) const;
 
@@ -21,6 +21,7 @@ public:
 
 private:
     Statistics* m_statistics;
+    QVector<QString> m_randomColors;
 };
 
 #endif // STATISTICSMODEL_H

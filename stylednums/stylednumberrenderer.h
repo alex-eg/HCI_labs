@@ -17,6 +17,7 @@ public:
 
     QImage* image() const;
     int num() const;
+    virtual QColor color() const;
 
 protected:
     void renderWithText(const QStyleOption& _option, const QString& _text);
@@ -24,6 +25,7 @@ protected:
 protected:
     int m_num;
     QImage* m_img;
+    QColor m_color;
 };
 
 #endif // ABSTRACTSTYLEDNUMBERRENDERER_H
