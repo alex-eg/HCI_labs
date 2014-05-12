@@ -11,7 +11,7 @@ namespace Ui
 class TestGenerator;
 class DigitsDemonstrator;
 class TestAnswersChooser;
-class Statistics;
+class StatisticsAggregator;
 class StatisticsWidget;
 
 class MainWindow : public QMainWindow
@@ -22,8 +22,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    Statistics *statistics() const;
-    Statistics *statistics(const QString& _user) const;
+    StatisticsAggregator *statistics() const;
+    StatisticsAggregator *statistics(const QString& _user) const;
     QList<QString> users() const;
 
 private slots:
@@ -54,7 +54,7 @@ private:
     TestAnswersChooser* m_testChooser;
     StatisticsWidget* m_statisticsWidget;
 
-    QMap<QString, Statistics*> m_userStatistics;
+    QMap<QString, StatisticsAggregator*> m_userStatistics;
 };
 
 #endif // MAINWINDOW_H

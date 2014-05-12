@@ -1,46 +1,33 @@
 #ifndef STATISTICS_H
 #define STATISTICS_H
 
-#include <QDebug>
-#include <QMap>
 #include <QString>
-#include "stylednums/stylednumsapi.h"
+#include <QVector>
+#include "statisticsapi.h"
+
+class StyledNumberRenderer;
 
 class Statistics
 {
 public:
-    struct Stat;
+    Statistics(StatTypes _type);
+    virtual ~Statistics();
 
-    Statistics(const int _maxLength = StylesCount);
-    const QVector<Stat> *statistics();
+    const QVector<int> *statistics() const;
+    const QVector<QString> *description() const;
 
-    void addUserStats(const QVector<Stat>& _stats);
-    QVector<Statistics::Stat> defaultUserStats();
+    virtual void addUserStats(const QList<StyledNumberRenderer*> &_showedData, const QList<int> &_userCheckedData);
 
-    void info() const;
-//  -------------------------------------------
-    struct Stat
-    {
-        Stat() : success(0), unsuccess(0)   {}
-
-        friend const Stat& operator++(Stat &_s)
-        {
-            ++_s.success;
-            return _s;
-        }
-
-        friend const Stat& operator--(Stat &_s)
-        {
-            ++_s.unsuccess;
-            return _s;
-        }
-        int success, unsuccess;
-    };
-
-//  -------------------------------------------
+protected:
+    Statistics() : m_pimpl(NULL) {}
 private:
-    const int m_maxLength;
-    QVector<Stat> m_statistics;
+    Statistics* statsFactory(StatTypes _type) const;
+
+protected:
+    QVector<int> m_statistics;
+    QVector<QString> m_description;
+
+    Statistics* m_pimpl;
 };
 
 #endif // STATISTICS_H

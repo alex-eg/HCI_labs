@@ -8,7 +8,7 @@ class StatisticsWidget;
 }
 
 class MainWindow;
-class Statistics;
+class StatisticsAggregator;
 class StatisticsModel;
 
 class StatisticsWidget : public QWidget
@@ -28,7 +28,7 @@ private:
     Ui::StatisticsWidget *ui;
 
     MainWindow* m_mainWindow;
-    Statistics* m_statistics;
+    StatisticsAggregator* m_statistics;
 
     StatisticsModel* m_model;
 };

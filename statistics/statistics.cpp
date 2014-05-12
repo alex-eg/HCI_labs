@@ -1,42 +1,45 @@
 #include <QDebug>
+
 #include "statistics.h"
+#include "totalstatistics.h"
 
-Statistics::Statistics(const int _maxLength)
-    : m_maxLength(_maxLength),
-      m_statistics(m_maxLength)
+Statistics::Statistics(StatTypes _type)
+    : m_pimpl(statsFactory(_type))
+{}
+
+Statistics::~Statistics()
 {
-    qDebug() << Q_FUNC_INFO;
+    delete m_pimpl;
 }
 
-const QVector<Statistics::Stat> *Statistics::statistics()
+const QVector<int> *Statistics::statistics() const
 {
-    return &m_statistics;
+    if(!m_pimpl)
+        return &m_statistics;
+    return m_pimpl->statistics();// &m_statistics;
 }
 
-void Statistics::addUserStats(const QVector<Stat>& _stats)
+const QVector<QString> *Statistics::description() const
 {
-    Q_ASSERT(_stats.size() == m_maxLength);
+    if(!m_pimpl)
+        return &m_description;
+    return m_pimpl->description(); // &m_description;
+}
 
-    for(int i = 0; i < m_maxLength; i++)
+void Statistics::addUserStats(const QList<StyledNumberRenderer *> &_showedData, const QList<int> &_userCheckedData)
+{
+    m_pimpl->addUserStats(_showedData, _userCheckedData);
+}
+
+Statistics *Statistics::statsFactory(StatTypes _type) const
+{
+    switch (_type)
     {
-        m_statistics[i].success   += _stats[i].success;
-        m_statistics[i].unsuccess += _stats[i].unsuccess;
+    case Total:
+        return new TotalStatistics();
+    default:
+        qDebug() << "undefine stat type! in " << Q_FUNC_INFO;
     }
-
-    info();
+    return NULL;
 }
 
-QVector<Statistics::Stat> Statistics::defaultUserStats()
-{
-    QVector<Statistics::Stat> stats;
-    stats.resize(m_maxLength);
-    return stats;
-}
-
-void Statistics::info() const
-{
-    foreach(Stat stat, m_statistics)
-    {
-        qDebug() << stat.success << stat.unsuccess;
-    }
-}

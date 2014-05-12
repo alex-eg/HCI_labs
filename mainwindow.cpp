@@ -6,7 +6,7 @@
 #include "digitsdemonstrator.h"
 #include "testgenerator.h"
 #include "testanswerschooser.h"
-#include "statistics.h"
+#include "statistics/statisticsaggregator.h"
 #include "stylednums/stylednumberrenderer.h"
 
 #include "statisticswidget.h"
@@ -36,19 +36,19 @@ MainWindow::~MainWindow()
     delete m_demonstrator;
     delete m_testChooser;
 
-    foreach (Statistics* statistics, m_userStatistics)
+    foreach (StatisticsAggregator* statistics, m_userStatistics)
         delete statistics;
 }
 
-Statistics* MainWindow::statistics() const
+StatisticsAggregator* MainWindow::statistics() const
 {
     return statistics(currentUserName());
 }
 
-Statistics* MainWindow::statistics(const QString& _user) const
+StatisticsAggregator* MainWindow::statistics(const QString& _user) const
 {
     if(!m_userStatistics.contains(_user))
-        const_cast<MainWindow*>(this)->m_userStatistics[_user] = new Statistics();
+        const_cast<MainWindow*>(this)->m_userStatistics[_user] = new StatisticsAggregator();
 
     return m_userStatistics[_user];
 }
@@ -180,20 +180,22 @@ QString MainWindow::currentUserName() const
 
 void MainWindow::saveStatistics()
 {
-    Statistics* gatheredStats = statistics();
-    QVector<Statistics::Stat> savingStats = gatheredStats->defaultUserStats();
+    StatisticsAggregator* gatheredStats = statistics();
+    gatheredStats->addUserStats(m_testGenerator->generatedTest(), m_testChooser->checkedNums());
 
-    foreach (StyledNumberRenderer* renderer, m_testGenerator->generatedTest())
-    {
-        int generatedNum = renderer->num();
-        Style generatedStyle = renderer->type();
+//    QVector<Statistics::Stat> savingStats = gatheredStats->defaultUserStats();
 
-        if(m_testChooser->checkedNums().contains(generatedNum))
-            ++savingStats[generatedStyle];
-        else
-            --savingStats[generatedStyle];
-    }
+//    foreach (StyledNumberRenderer* renderer, m_testGenerator->generatedTest())
+//    {
+//        int generatedNum = renderer->num();
+//        Style generatedStyle = renderer->type();
 
-    gatheredStats->addUserStats(savingStats);
-    m_userStatistics[currentUserName()] = gatheredStats;
+//        if(m_testChooser->checkedNums().contains(generatedNum))
+//            ++savingStats[generatedStyle];
+//        else
+//            --savingStats[generatedStyle];
+//    }
+
+//    gatheredStats->addUserStats(savingStats);
+//    m_userStatistics[currentUserName()] = gatheredStats;
 }

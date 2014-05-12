@@ -1,21 +1,23 @@
+#include <QDebug>
 #include "statisticsmodel.h"
-#include "statistics.h"
+#include "statistics/statisticsaggregator.h"
+#include "stylednums/stylednumsapi.h"
 
-StatisticsModel::StatisticsModel(Statistics *_statistics)
-    : m_statistics(_statistics)
+StatisticsModel::StatisticsModel(StatisticsAggregator *_statistics)
+    : m_statistics(_statistics),
+      m_statType(Total)
 {
     for(int i = 0; i < rowCount(); i++)
         m_randomColors << randomColor();
 
-    beginResetModel();
-    endResetModel();
+    setStatType(m_statType);
 }
 
 QModelIndex StatisticsModel::index(int _row, int _column, const QModelIndex &_parent) const
 {
     if(_column == 1)
     {
-        double success = m_statistics->statistics()->at(_row).success;
+        double success = m_statistics->statistics(m_statType)->at(_row);// ->statistics()->at(_row).success;
         return createIndex(_row, _column, success);
     }
     else
@@ -29,8 +31,8 @@ QModelIndex StatisticsModel::parent(const QModelIndex&) const
 
 int StatisticsModel::rowCount(const QModelIndex &parent) const
 {
-    qDebug() << "rowCount = " << m_statistics->statistics()->size();
-    return m_statistics->statistics()->size();
+    qDebug() << "rowCount = " << currStatistics()->size();
+    return currStatistics()->size();
 }
 
 int StatisticsModel::columnCount(const QModelIndex &parent) const
@@ -50,12 +52,29 @@ QVariant StatisticsModel::data(const QModelIndex& _index, int _role) const
         if(_role == Qt::DecorationRole)
             return QVariant(m_randomColors[_index.row()]);
         else
-            return QVariant(stylesNames()[_index.row()]);
+            return QVariant(currDescription()->at(_index.row()));
     }
     else
         qDebug() << Q_FUNC_INFO;
 
     return QVariant();
+}
+
+void StatisticsModel::setStatType(StatTypes _type)
+{
+    beginResetModel();
+    m_statType = _type;
+    endResetModel();
+}
+
+const QVector<int> *StatisticsModel::currStatistics() const
+{
+    return m_statistics->statistics(m_statType);
+}
+
+const QVector<QString> *StatisticsModel::currDescription() const
+{
+    return m_statistics->description(m_statType);
 }
 
 

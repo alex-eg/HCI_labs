@@ -1,6 +1,6 @@
 #include "statisticswidget.h"
 #include "ui_statisticswidget.h"
-#include "statistics.h"
+#include "statistics/statisticsaggregator.h"
 #include "statisticsmodel.h"
 
 #include "mainwindow.h"
