@@ -331,13 +331,14 @@ void PieView::paintEvent(QPaintEvent *event)
     double startAngle = 0.0;
     int row;
 
-    for (row = 0; row < model()->rowCount(rootIndex()); ++row) {
+    for (row = 0; row < model()->rowCount(rootIndex()); ++row)
+    {
         QModelIndex index = model()->index(row, 1, rootIndex());
         double value = model()->data(index).toDouble();
 
         if (value > 0.0)
         {
-            double angle = 360*value/totalValue;
+            double angle = 360 * value/totalValue;
 
             QModelIndex colorIndex = model()->index(row, 0, rootIndex());
             QColor color = QColor(model()->data(colorIndex, Qt::DecorationRole).toString());
@@ -358,11 +359,13 @@ void PieView::paintEvent(QPaintEvent *event)
 
     int keyNumber = 0;
 
-    for (row = 0; row < model()->rowCount(rootIndex()); ++row) {
+    for (row = 0; row < model()->rowCount(rootIndex()); ++row)
+    {
         QModelIndex index = model()->index(row, 1, rootIndex());
         double value = model()->data(index).toDouble();
 
-        if (value > 0.0) {
+        if (value > 0.0)
+        {
             QModelIndex labelIndex = model()->index(row, 0, rootIndex());
 
             QStyleOptionViewItem option = viewOptions();
@@ -371,8 +374,12 @@ void PieView::paintEvent(QPaintEvent *event)
                 option.state |= QStyle::State_Selected;
             if (currentIndex() == labelIndex)
                 option.state |= QStyle::State_HasFocus;
+
+            Q_ASSERT(itemDelegate());
             itemDelegate()->paint(&painter, option, labelIndex);
 
+            qDebug() << option.palette.color(Qt::BackgroundColorRole);
+            qDebug() << option.rect;
             ++keyNumber;
         }
     }

@@ -18,6 +18,9 @@ StatisticsAggregator::~StatisticsAggregator()
 
 const QVector<int> *StatisticsAggregator::statistics(StatTypes _type) const
 {
+    Q_ASSERT(_type < StatTypesCount);
+    Q_ASSERT(m_heap.size() == StatTypesCount);
+
     return m_heap.at(_type)->statistics();
 }
 

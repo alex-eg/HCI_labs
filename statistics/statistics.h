@@ -13,10 +13,11 @@ public:
     Statistics(StatTypes _type);
     virtual ~Statistics();
 
-    const QVector<int> *statistics() const;
-    const QVector<QString> *description() const;
+    virtual const QVector<int> *statistics() const;
+    virtual const QVector<QString> *description() const;
 
     virtual void addUserStats(const QList<StyledNumberRenderer*> &_showedData, const QList<int> &_userCheckedData);
+    virtual StatTypes type() const;
 
 protected:
     Statistics() : m_pimpl(NULL) {}

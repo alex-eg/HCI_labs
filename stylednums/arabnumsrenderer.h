@@ -1,7 +1,7 @@
 #ifndef ARABNUMSRENDERER_H
 #define ARABNUMSRENDERER_H
 
-#include "stylednums/stylednumberrenderer.h"
+#include "stylednumberrenderer.h"
 
 class ArabNumsRenderer : public StyledNumberRenderer
 {

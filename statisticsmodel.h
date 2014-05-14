@@ -22,6 +22,7 @@ public slots:
     void setStatType(StatTypes _type);
 
 private:
+    inline double statisticsValueAt(int _pos) const;
     inline const QVector<int>* currStatistics() const;
     inline const QVector<QString>* currDescription() const;
 

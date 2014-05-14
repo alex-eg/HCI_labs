@@ -1,5 +1,5 @@
 #include "totalstatistics.h"
-#include "stylednums/stylednumberrenderer.h"
+#include "../stylednums/stylednumberrenderer.h"
 
 TotalStatistics::TotalStatistics()
     : Statistics()
@@ -19,5 +19,9 @@ void TotalStatistics::addUserStats(const QList<StyledNumberRenderer *> &_showedD
         else
             m_statistics[1]++;
     }
+}
 
+StatTypes TotalStatistics::type() const
+{
+    return Total;
 }

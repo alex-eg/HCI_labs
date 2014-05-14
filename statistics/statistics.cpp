@@ -2,6 +2,7 @@
 
 #include "statistics.h"
 #include "totalstatistics.h"
+#include "stylestatistics.h"
 
 Statistics::Statistics(StatTypes _type)
     : m_pimpl(statsFactory(_type))
@@ -31,12 +32,20 @@ void Statistics::addUserStats(const QList<StyledNumberRenderer *> &_showedData, 
     m_pimpl->addUserStats(_showedData, _userCheckedData);
 }
 
+StatTypes Statistics::type() const
+{
+    return m_pimpl->type();
+}
+
 Statistics *Statistics::statsFactory(StatTypes _type) const
 {
     switch (_type)
     {
     case Total:
         return new TotalStatistics();
+    case StyleSuccess:
+    case StylesUnsuccess:
+        return new StyleStatistics(_type);
     default:
         qDebug() << "undefine stat type! in " << Q_FUNC_INFO;
     }

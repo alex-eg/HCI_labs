@@ -21,6 +21,9 @@ public:
 signals:
     void finished();
 
+private slots:
+    void showOtherStatistics(int _index);
+
 private:
     void closeEvent(QCloseEvent*);
 

@@ -1,3 +1,4 @@
+#include <QDebug>
 #include "statisticswidget.h"
 #include "ui_statisticswidget.h"
 #include "statistics/statisticsaggregator.h"
@@ -22,13 +23,19 @@ StatisticsWidget::StatisticsWidget(MainWindow* _mainWindow, QWidget* _parent) :
     }
 
     ui->diagramm->setModel(m_model);
-
     ui->diagramm->dataChanged(QModelIndex(), QModelIndex());
+
+    connect(ui->type, SIGNAL(currentIndexChanged(int)), this, SLOT(showOtherStatistics(int)));
 }
 
 StatisticsWidget::~StatisticsWidget()
 {
     delete ui;
+}
+
+void StatisticsWidget::showOtherStatistics(int _index)
+{
+    m_model->setStatType(StatTypes(_index));
 }
 
 void StatisticsWidget::closeEvent(QCloseEvent *)

@@ -5,7 +5,7 @@
 
 StatisticsModel::StatisticsModel(StatisticsAggregator *_statistics)
     : m_statistics(_statistics),
-      m_statType(Total)
+      m_statType(StatTypes(0))
 {
     for(int i = 0; i < rowCount(); i++)
         m_randomColors << randomColor();
@@ -15,13 +15,7 @@ StatisticsModel::StatisticsModel(StatisticsAggregator *_statistics)
 
 QModelIndex StatisticsModel::index(int _row, int _column, const QModelIndex &_parent) const
 {
-    if(_column == 1)
-    {
-        double success = m_statistics->statistics(m_statType)->at(_row);// ->statistics()->at(_row).success;
-        return createIndex(_row, _column, success);
-    }
-    else
-        return createIndex(_row, _column);
+    return createIndex(_row, _column);
 }
 
 QModelIndex StatisticsModel::parent(const QModelIndex&) const
@@ -31,7 +25,6 @@ QModelIndex StatisticsModel::parent(const QModelIndex&) const
 
 int StatisticsModel::rowCount(const QModelIndex &parent) const
 {
-    qDebug() << "rowCount = " << currStatistics()->size();
     return currStatistics()->size();
 }
 
@@ -44,15 +37,14 @@ QVariant StatisticsModel::data(const QModelIndex& _index, int _role) const
 {
     if(_index.column() == 1 && _role == Qt::DisplayRole)
     {
-        qDebug() << _index.internalId();
-        return _index.internalId();
+        return statisticsValueAt(_index.row());
     }
     else if(_index.column() == 0)
     {
         if(_role == Qt::DecorationRole)
             return QVariant(m_randomColors[_index.row()]);
         else
-            return QVariant(currDescription()->at(_index.row()));
+            return QVariant(currDescription()->at(_index.row()) + " - " + QString::number(statisticsValueAt(_index.row())));
     }
     else
         qDebug() << Q_FUNC_INFO;
@@ -63,8 +55,13 @@ QVariant StatisticsModel::data(const QModelIndex& _index, int _role) const
 void StatisticsModel::setStatType(StatTypes _type)
 {
     beginResetModel();
-    m_statType = _type;
+        m_statType = _type;
     endResetModel();
+}
+
+double StatisticsModel::statisticsValueAt(int _pos) const
+{
+    return m_statistics->statistics(m_statType)->at(_pos);
 }
 
 const QVector<int> *StatisticsModel::currStatistics() const

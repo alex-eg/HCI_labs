@@ -1,6 +1,6 @@
 #include <QPainter>
 
-#include "stylednums/stylednumberrenderer.h"
+#include "stylednumberrenderer.h"
 
 StyledNumberRenderer::StyledNumberRenderer(int _num)
     : m_num(_num),
