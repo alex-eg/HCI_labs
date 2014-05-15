@@ -23,6 +23,7 @@ signals:
 
 private slots:
     void showOtherStatistics(int _index);
+    void showOtherUserStatistics(QString _newUser);
 
 private:
     void closeEvent(QCloseEvent*);

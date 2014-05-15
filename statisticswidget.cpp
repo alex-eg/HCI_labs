@@ -4,7 +4,6 @@
 #include "statisticswidget.h"
 #include "ui_statisticswidget.h"
 #include "statistics/statisticsaggregator.h"
-#include "statisticsmodel.h"
 
 #include "mainwindow.h"
 
@@ -22,10 +21,10 @@ StatisticsWidget::StatisticsWidget(MainWindow* _mainWindow, QWidget* _parent) :
         ui->userChoose->addItem(str);
     }
 
-//    m_model->setColumnCount(2);
     ui->diagramm->setModel(m_model);
 
     connect(ui->type, SIGNAL(currentIndexChanged(int)), this, SLOT(showOtherStatistics(int)));
+    connect(ui->userChoose, SIGNAL(currentIndexChanged(QString)), this, SLOT(showOtherUserStatistics(QString)));
 
     showOtherStatistics(ui->type->currentIndex());
 }
@@ -55,6 +54,12 @@ void StatisticsWidget::showOtherStatistics(int _index)
         m_model->setData(m_model->index(i, 0, QModelIndex()), getColorForChart(i), Qt::DecorationRole);
     }
     ui->diagramm->dataChanged(QModelIndex(), QModelIndex());
+}
+
+void StatisticsWidget::showOtherUserStatistics(QString _newUser)
+{
+    m_statistics = m_mainWindow->statistics(_newUser);
+    showOtherStatistics(ui->type->currentIndex());
 }
 
 void StatisticsWidget::closeEvent(QCloseEvent *)
