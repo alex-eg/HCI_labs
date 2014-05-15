@@ -25,7 +25,6 @@ SOURCES += main.cpp\
     statistics/statistics.cpp \
     statisticswidget.cpp \
     pieview.cpp \
-    statisticsmodel.cpp \
     statistics/totalstatistics.cpp \
     statistics/statisticsaggregator.cpp \
     statistics/stylestatistics.cpp
@@ -44,7 +43,6 @@ HEADERS  += mainwindow.h \
     statistics/statistics.h \
     statisticswidget.h \
     pieview.h \
-    statisticsmodel.h \
     statistics/totalstatistics.h \
     statistics/statisticsaggregator.h \
     statistics/statisticsapi.h \

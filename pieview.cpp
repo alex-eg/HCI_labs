@@ -378,8 +378,6 @@ void PieView::paintEvent(QPaintEvent *event)
             Q_ASSERT(itemDelegate());
             itemDelegate()->paint(&painter, option, labelIndex);
 
-            qDebug() << option.palette.color(Qt::BackgroundColorRole);
-            qDebug() << option.rect;
             ++keyNumber;
         }
     }

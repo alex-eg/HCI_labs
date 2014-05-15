@@ -7,9 +7,9 @@ namespace Ui {
 class StatisticsWidget;
 }
 
+class QStandardItemModel;
 class MainWindow;
 class StatisticsAggregator;
-class StatisticsModel;
 
 class StatisticsWidget : public QWidget
 {
@@ -26,14 +26,15 @@ private slots:
 
 private:
     void closeEvent(QCloseEvent*);
+    void resetModel();
+    inline QColor getColorForChart(int _pos);
 
 private:
     Ui::StatisticsWidget *ui;
 
     MainWindow* m_mainWindow;
     StatisticsAggregator* m_statistics;
-
-    StatisticsModel* m_model;
+    QStandardItemModel* m_model;
 };
 
 #endif // STATISTICSWIDGET_H
