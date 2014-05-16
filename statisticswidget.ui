@@ -51,6 +51,16 @@
      </item>
      <item>
       <property name="text">
+       <string>Угаданные числа</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Не угаданные числа</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
        <string>Общая статистика</string>
       </property>
      </item>

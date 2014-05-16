@@ -3,6 +3,7 @@
 #include "statistics.h"
 #include "totalstatistics.h"
 #include "stylestatistics.h"
+#include "numberstatistics.h"
 
 Statistics::Statistics(StatTypes _type)
     : m_pimpl(statsFactory(_type))
@@ -46,6 +47,9 @@ Statistics *Statistics::statsFactory(StatTypes _type) const
     case StyleSuccess:
     case StylesUnsuccess:
         return new StyleStatistics(_type);
+    case NumberSuccess:
+    case NumberUnsuccess:
+        return new NumberStatistics(_type);
     default:
         qDebug() << "undefine stat type! in " << Q_FUNC_INFO;
     }
