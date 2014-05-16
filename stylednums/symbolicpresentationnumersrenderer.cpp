@@ -27,9 +27,9 @@ Style SymbolicPresentationNumersRenderer::type() const
     return SymbolicNum;
 }
 
-void SymbolicPresentationNumersRenderer::render(const QStyleOption& _option)
+void SymbolicPresentationNumersRenderer::render(const QStyleOption &_option, const QFont &_font)
 {
     int randomSymbol = qrand() % m_symbols.size();
     QString s(m_num, m_symbols[randomSymbol]);
-    renderWithText(_option, s);
+    renderWithText(_option, _font, s);
 }

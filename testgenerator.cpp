@@ -1,3 +1,5 @@
+#include <QDebug>
+
 #include "testgenerator.h"
 
 #include "stylednums/stylednumberrenderer.h"
@@ -19,12 +21,13 @@ void TestGenerator::generateOtherTest()
     int digits[10];
     fillByRandomUniqueNums(digits, 10);
 
-    int digitsCount = qrand() % 9 + 1;
+    int digitsCount = qrand() % 8 + 2;
     for(int i = 0; i < digitsCount; i++)
     {
         Style style = static_cast<Style>(qrand() % StylesCount);
         m_generatedTest << styledNumberFactory(style, digits[i]);
     }
+    qDebug() << "generated " << digitsCount << " digits";
 }
 
 QList<StyledNumberRenderer *> TestGenerator::generatedTest() const

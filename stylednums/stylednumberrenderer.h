@@ -13,14 +13,14 @@ public:
     virtual ~StyledNumberRenderer();
 
     virtual Style type() const = 0;
-    virtual void render(const QStyleOption& _option) = 0;
+    virtual void render(const QStyleOption& _option, const QFont& _font = defaultStringsFont) = 0;
 
     QImage* image() const;
     int num() const;
     virtual QColor color() const;
 
 protected:
-    void renderWithText(const QStyleOption& _option, const QString& _text);
+    void renderWithText(const QStyleOption& _option, const QFont& _font, const QString &_text);
 
 protected:
     int m_num;

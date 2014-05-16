@@ -18,7 +18,7 @@ Style RomeNumsRenderer::type() const
     return RomeNums;
 }
 
-void RomeNumsRenderer::render(const QStyleOption &_option)
+void RomeNumsRenderer::render(const QStyleOption &_option, const QFont &_font)
 {
-    renderWithText(_option, romanNums[m_num]);
+    renderWithText(_option, _font, romanNums[m_num]);
 }

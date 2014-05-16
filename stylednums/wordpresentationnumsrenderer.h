@@ -9,8 +9,7 @@ public:
     WordPresentationNumsRenderer(int _num);
 
     Style type() const;
-    void render(const QStyleOption& _option);
-
+    void render(const QStyleOption& _option, const QFont& _font);
 };
 
 #endif // WORDPRESENTATIONNUMSRENDERER_H

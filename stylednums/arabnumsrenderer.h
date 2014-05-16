@@ -9,6 +9,7 @@ public:
     ArabNumsRenderer(int _number);
     Style type() const;
 
+    void render(const QStyleOption &_option, const QFont &_font);
     void render(const QStyleOption& _option);
 };
 

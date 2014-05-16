@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QList>
+#include <QStyleOption>
 
 namespace Ui {
 class DigitsDemonstrator;
@@ -30,6 +31,8 @@ private slots:
 
 private:
     void renderNumsPics();
+    QFont generateFont() const;
+    QStyleOption generateOption() const;
 
 private:
     Ui::DigitsDemonstrator *ui;

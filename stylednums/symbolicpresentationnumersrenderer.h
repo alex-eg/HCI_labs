@@ -10,7 +10,7 @@ public:
     SymbolicPresentationNumersRenderer(int _num, QVector<QChar> _specificSymbols);
 
     Style type() const;
-    void render(const QStyleOption& _option);
+    void render(const QStyleOption& _option, const QFont& _font);
 
 private:
     QVector<QChar> m_symbols;

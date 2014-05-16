@@ -27,7 +27,7 @@ QColor StyledNumberRenderer::color() const
     return m_color;
 }
 
-void StyledNumberRenderer::renderWithText(const QStyleOption& _option, const QString &_text)
+void StyledNumberRenderer::renderWithText(const QStyleOption& _option, const QFont& _font, const QString &_text)
 {
     delete m_img;
     m_img = new QImage(_option.rect.size(), QImage::Format_RGB888);
@@ -36,7 +36,7 @@ void StyledNumberRenderer::renderWithText(const QStyleOption& _option, const QSt
     QPainter painter(m_img);
     painter.setBrush(_option.palette.text());
 
-    painter.setFont(defaultStringsFont);
+    painter.setFont(_font);
 
     painter.drawText(_option.rect, _text);
 

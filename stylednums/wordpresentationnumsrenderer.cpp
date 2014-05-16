@@ -17,7 +17,7 @@ Style WordPresentationNumsRenderer::type() const
     return Words;
 }
 
-void WordPresentationNumsRenderer::render(const QStyleOption &_option)
+void WordPresentationNumsRenderer::render(const QStyleOption &_option, const QFont &_font)
 {
-    renderWithText(_option, words[m_num]);
+    renderWithText(_option, _font, words[m_num]);
 }

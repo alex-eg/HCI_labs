@@ -58,12 +58,6 @@ void DigitsDemonstrator::timerTicked()
 
 void DigitsDemonstrator::renderNumsPics()
 {
-    QStyleOption option;
-    option.palette.setColor(QPalette::Text, Qt::black);
-    option.rect = QRect(0, 0, 100, 50);
-
-    option.fontMetrics = QFontMetrics(defaultStringsFont);
-
     foreach(StyledNumberRenderer* renderer, m_testGenerator->generatedTest())
     {
         if(!renderer)
@@ -71,11 +65,32 @@ void DigitsDemonstrator::renderNumsPics()
             qDebug() << "smth goes wrong in " << Q_FUNC_INFO;
             continue;
         }
-        renderer->render(option);
+        renderer->render(generateOption(), generateFont());
 
         QLabel* label = new QLabel;
         label->setPixmap(QPixmap::fromImage(*renderer->image()));
         layout()->addWidget(label);
     }
+}
+
+QFont DigitsDemonstrator::generateFont() const
+{
+    QFont font = defaultStringsFont;
+    font.setItalic(qrand() % 2);
+    font.setBold(qrand() % 2);
+
+    int dispersy = 10;
+    int newSize = font.pixelSize() + (qrand() % dispersy) + 30;
+    font.setPixelSize(newSize);
+    return font;
+}
+
+QStyleOption DigitsDemonstrator::generateOption() const
+{
+    QStyleOption option;
+    option.palette.setColor(QPalette::Text, Qt::black);
+    option.rect = QRect(0, 0, 140, 140);
+
+    return option;
 }
 
