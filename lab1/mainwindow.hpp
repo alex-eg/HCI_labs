@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include <QTimer>
+#include <QDateTime>
+#include <QMap>
+#include <QtAlgorithms>
 
 namespace Ui {
 class MainWindow;
@@ -18,10 +21,16 @@ public:
 
 private:
     Ui::MainWindow *ui;
-
+    QTimer * t;
+    int time;
+    QString returnString(bool ispictograms, int num);
+    QMap<int, int> nnums;
 private slots:
+    void updateTimer();
     void startExperiment();
     void continueExperiment();
+    void proceedToRusults();
+    void startOver();
 };
 
 #endif // MAINWINDOW_H

@@ -18,7 +18,7 @@
     <item row="0" column="1">
      <widget class="QStackedWidget" name="stackedWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="page">
        <layout class="QGridLayout" name="gridLayout_2">
@@ -29,6 +29,9 @@
           </property>
           <property name="maximum">
            <number>10</number>
+          </property>
+          <property name="value">
+           <number>5</number>
           </property>
          </widget>
         </item>
@@ -85,6 +88,9 @@
           </property>
           <property name="maximum">
            <number>9</number>
+          </property>
+          <property name="value">
+           <number>5</number>
           </property>
          </widget>
         </item>
@@ -322,7 +328,7 @@
          </widget>
         </item>
         <item row="1" column="0" colspan="3">
-         <widget class="QPushButton" name="pushButton_2">
+         <widget class="QPushButton" name="ok2PushButton">
           <property name="text">
            <string>Ok</string>
           </property>
