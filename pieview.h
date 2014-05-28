@@ -42,6 +42,10 @@
 #define PIEVIEW_H
 
 #include <QAbstractItemView>
+#include <QMouseEvent>
+#include <QPen>
+#include <QBrush>
+#include <QPainter>
 
 //! [0]
 class PieView : public QAbstractItemView

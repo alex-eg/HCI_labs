@@ -7,7 +7,7 @@ class StyleStatistics : public Statistics
 {
 public:
     StyleStatistics(StatTypes _type);
-    void addUserStats(const QList<StyledNumberRenderer*>& _showedData, const QList<int>& _userCheckedData) Q_DECL_OVERRIDE;
+    void addUserStats(const QList<StyledNumberRenderer*>& _showedData, const QList<int>& _userCheckedData);
     StatTypes type() const;
 
 private:
